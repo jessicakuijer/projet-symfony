@@ -1,7 +1,7 @@
 # projet-symfony
 Exercice de création de blog, d'une liste étudiants, création d'utilisateurs et intégration d'EasyAdmin avec droits d'accès.
 
-![ScreenShot](https://github.com/jessicakuijer/projet-symfony/blob/exercice-symfony/screenshot.png})
+![Screenshot](screenshot.png)
 
 Déroulé:
 1/ Il faut installer symfony en premier lieu.
