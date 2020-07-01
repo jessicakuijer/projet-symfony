@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <h1>Article</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ article.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ article.titre }}</td>
+            </tr>
+            <tr>
+                <th>Auteur</th>
+                <td>{% if article.auteur %}
+                    {{ article.auteur }}
+                    {% else %}
+                    Pas d'auteur
+                    {% endif %}</td>
+            </tr>
+            <tr>
+                <th>Resumé</th>
+                <td>{{ article.resume }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{% if article.image %}
+                    <img class="img-fluid img-thumbnail" src="{{ asset('uploads/images/articles/')}}{{ article.image }}" style="width:40%">
+                    {% else %}
+                    Pas d'image
+                    {% endif %}</td>
+            </tr>
+            <tr>
+                <th>Crée le</th>
+                <td>{{ article.createdAt ? article.createdAt|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ article.contenu }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    Retour<a href="{{ path('article_index') }}">&#128214;</a>
+
+    Modifier<a href="{{ path('article_edit', {'id': article.id}) }}">&#9999;</a>
+
+    {{ include('article/_delete_form.html.twig') }}
+
+    <hr>
+
+    <!--rajout formulaire commentaire à partir du template _form.html.twig -->
+    <h4>Commentaires soumis:</h4>
+
+    {% for commentaire in commentaires %}
+        Posté par <em>{{ commentaire.user }}</em> le {{ commentaire.createdAt|date('d-m-Y à H:i:s') }} :
+        <p>{{ commentaire.contenu }}</p>
+        <hr>
+    {% endfor %}
+
+    <h4> Rédiger un commentaire : </h4>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-outline-success">{{ button_label|default('Soumettre un commentaire') }}</button>
+    {{ form_end(form) }}
+
+    <!-- END rajout formulaire commentaire -->
+
+    
+{% endblock %}
